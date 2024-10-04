@@ -1,5 +1,6 @@
 package com.example.api_processos_juridicos.domain.usuario;
 
+import com.example.api_processos_juridicos.domain.processo.ProcessoJuridico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,4 +41,7 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String senha;
 
+    @ManyToOne
+    @JoinColumn(name = "processo_id")
+    private ProcessoJuridico processoJuridico;
 }
