@@ -1,6 +1,6 @@
 package com.example.api_processos_juridicos.domain.processo;
 
-import com.example.api_processos_juridicos.domain.usuario.Usuario;
+import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,5 +35,5 @@ public class ProcessoJuridico {
     private StatusProcesso status;
 
     @OneToMany(mappedBy = "processoJuridico", cascade = CascadeType.ALL)
-    private List<Usuario> partesEnvolvidas = new ArrayList<>();
+    private List<Pessoa> partesEnvolvidas = new ArrayList<>();
 }

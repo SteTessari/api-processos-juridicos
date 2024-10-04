@@ -1,7 +1,7 @@
 package com.example.api_processos_juridicos.domain.processo;
 
+import com.example.api_processos_juridicos.domain.pessoa.PessoaDTO;
 import com.example.api_processos_juridicos.domain.usuario.Usuario;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -33,5 +33,5 @@ public class ProcessoJuridicoDTO implements Serializable {
     private StatusProcesso status;
 
     @NotEmpty(message = "Por favor informe as partes envolvidas")
-    private List<Usuario> partesEnvolvidas = new ArrayList<>();
+    private List<PessoaDTO> partesEnvolvidas = new ArrayList<>();
 }
