@@ -21,7 +21,7 @@ public class UsuarioService extends TokenService {
     private final UsuarioMapper usuarioMapper = UsuarioMapper.INSTANCE;
 
     public void criar(UsuarioDTO usuarioDTO) {
-        Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmailOrInscricaoFederal(usuarioDTO.getEmail(), usuarioDTO.getInscricaoFederal());
+        Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(usuarioDTO.getEmail());
 
         if (usuarioEncontrado.isPresent())
             throw new ApiException(HttpStatus.CONFLICT, "O usuário já possui cadastro.");
