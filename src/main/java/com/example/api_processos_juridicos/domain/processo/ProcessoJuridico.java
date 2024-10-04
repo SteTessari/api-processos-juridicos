@@ -34,6 +34,10 @@ public class ProcessoJuridico {
     @Enumerated(EnumType.STRING)
     private StatusProcesso status;
 
-    @OneToMany(mappedBy = "processoJuridico", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "processo_pessoa",
+            joinColumns = @JoinColumn(name = "processo_id"),
+            inverseJoinColumns = @JoinColumn(name = "pessoa_id"))
     private List<Pessoa> partesEnvolvidas = new ArrayList<>();
+
 }

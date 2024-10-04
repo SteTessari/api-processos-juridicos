@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "pessoa")
 @Getter
@@ -35,7 +38,6 @@ public class Pessoa {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "processo_id")
-    private ProcessoJuridico processoJuridico;
+    @ManyToMany(mappedBy = "partesEnvolvidas")
+    private List<ProcessoJuridico> processos = new ArrayList<>();
 }
