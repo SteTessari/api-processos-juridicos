@@ -17,17 +17,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioDTO implements Serializable {
-    @NotBlank(message = "Por favor informe o nome completo")
-    private String nomeCompleto;
-
-    @NotBlank(message = "Por favor informe o CPF/CNPJ")
-    private String inscricaoFederal;
-
-    @NotNull
-    private TipoParte tipoParte;
-
-    @NotBlank(message = "Por favor informe o telefone")
-    private String telefone;
 
     @Email
     @NotBlank(message = "Por favor informe o email")
