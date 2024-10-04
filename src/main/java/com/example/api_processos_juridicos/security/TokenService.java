@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.api_processos_juridicos.domain.usuario.TipoParte;
+import com.example.api_processos_juridicos.domain.pessoa.TipoParte;
 import com.example.api_processos_juridicos.domain.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,6 @@ public class TokenService {
                     .withHeader(headerClaims)
                     .withIssuer("login-auth-api")
                     .withClaim("idUsuario", usuario.getId())
-                    .withClaim("tipoParte", usuario.getTipoParte().name())
                     .withExpiresAt(gerarDataExpiracaoToken())
                     .sign(algorithm);
 
@@ -54,9 +53,8 @@ public class TokenService {
                     .verify(token);
 
             Long idUsuario = decodedJWT.getClaim("idUsuario").asLong();
-            String tipoParte = String.valueOf(decodedJWT.getClaim("tipoParte"));
 
-            return new JwtTokenDTO(idUsuario, TipoParte.valueOf(tipoParte));
+            return new JwtTokenDTO(idUsuario);
 
         } catch (JWTVerificationException e) {
             return null;

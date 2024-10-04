@@ -30,7 +30,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             JwtTokenDTO jwtTokenDTO = tokenService.validarToken(token);
 
             if (jwtTokenDTO != null) {
-                Usuario usuario = usuarioRepository.findById(jwtTokenDTO.getId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+                Usuario usuario = usuarioRepository.findById(jwtTokenDTO.getIdUsuario()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
                 var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
