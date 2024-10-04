@@ -1,5 +1,7 @@
 package com.example.api_processos_juridicos.domain.usuario;
 
+import com.example.api_processos_juridicos.dto.usuario.LoginDTO;
+import com.example.api_processos_juridicos.dto.usuario.UsuarioDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
 import com.example.api_processos_juridicos.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;

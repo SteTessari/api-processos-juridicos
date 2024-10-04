@@ -1,5 +1,6 @@
 package com.example.api_processos_juridicos.domain.pessoa;
 
+import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

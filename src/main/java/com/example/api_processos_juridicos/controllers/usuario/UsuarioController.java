@@ -1,7 +1,7 @@
 package com.example.api_processos_juridicos.controllers.usuario;
 
-import com.example.api_processos_juridicos.domain.usuario.LoginDTO;
-import com.example.api_processos_juridicos.domain.usuario.UsuarioDTO;
+import com.example.api_processos_juridicos.dto.usuario.LoginDTO;
+import com.example.api_processos_juridicos.dto.usuario.UsuarioDTO;
 import com.example.api_processos_juridicos.domain.usuario.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

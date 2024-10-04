@@ -2,6 +2,7 @@ package com.example.api_processos_juridicos.security;
 
 import com.example.api_processos_juridicos.domain.usuario.Usuario;
 import com.example.api_processos_juridicos.domain.usuario.UsuarioRepository;
+import com.example.api_processos_juridicos.dto.token.JwtTokenDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;

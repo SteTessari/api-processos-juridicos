@@ -1,5 +1,6 @@
 package com.example.api_processos_juridicos.domain.pessoa;
 
+import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
 import com.example.api_processos_juridicos.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
