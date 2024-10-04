@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Collections;
+import java.util.Objects;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -30,7 +31,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             String token = this.recoverToken(request);
             JwtTokenDTO jwtTokenDTO = tokenService.validarToken(token);
 
-            if (jwtTokenDTO != null) {
+            if (Objects.nonNull(jwtTokenDTO)) {
                 Usuario usuario = usuarioRepository.findById(jwtTokenDTO.getIdUsuario()).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
                 var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null, authorities);
