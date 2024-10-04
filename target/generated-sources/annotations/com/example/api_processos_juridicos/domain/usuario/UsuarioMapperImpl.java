@@ -1,10 +1,11 @@
 package com.example.api_processos_juridicos.domain.usuario;
 
+import com.example.api_processos_juridicos.dto.usuario.UsuarioDTO;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-04T09:12:44-0300",
+    date = "2024-10-04T17:25:55-0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 public class UsuarioMapperImpl implements UsuarioMapper {
@@ -17,10 +18,6 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         Usuario usuario = new Usuario();
 
-        usuario.setNomeCompleto( usuarioDTO.getNomeCompleto() );
-        usuario.setInscricaoFederal( usuarioDTO.getInscricaoFederal() );
-        usuario.setTipoParte( usuarioDTO.getTipoParte() );
-        usuario.setTelefone( usuarioDTO.getTelefone() );
         usuario.setEmail( usuarioDTO.getEmail() );
         usuario.setSenha( usuarioDTO.getSenha() );
 
@@ -35,10 +32,6 @@ public class UsuarioMapperImpl implements UsuarioMapper {
 
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
-        usuarioDTO.setNomeCompleto( usuario.getNomeCompleto() );
-        usuarioDTO.setInscricaoFederal( usuario.getInscricaoFederal() );
-        usuarioDTO.setTipoParte( usuario.getTipoParte() );
-        usuarioDTO.setTelefone( usuario.getTelefone() );
         usuarioDTO.setEmail( usuario.getEmail() );
         usuarioDTO.setSenha( usuario.getSenha() );
 
@@ -51,18 +44,6 @@ public class UsuarioMapperImpl implements UsuarioMapper {
             return usuario;
         }
 
-        if ( usuarioDTO.getNomeCompleto() != null ) {
-            usuario.setNomeCompleto( usuarioDTO.getNomeCompleto() );
-        }
-        if ( usuarioDTO.getInscricaoFederal() != null ) {
-            usuario.setInscricaoFederal( usuarioDTO.getInscricaoFederal() );
-        }
-        if ( usuarioDTO.getTipoParte() != null ) {
-            usuario.setTipoParte( usuarioDTO.getTipoParte() );
-        }
-        if ( usuarioDTO.getTelefone() != null ) {
-            usuario.setTelefone( usuarioDTO.getTelefone() );
-        }
         if ( usuarioDTO.getEmail() != null ) {
             usuario.setEmail( usuarioDTO.getEmail() );
         }
