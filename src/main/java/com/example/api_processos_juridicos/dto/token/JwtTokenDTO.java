@@ -1,4 +1,4 @@
-package com.example.api_processos_juridicos.security;
+package com.example.api_processos_juridicos.dto.token;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

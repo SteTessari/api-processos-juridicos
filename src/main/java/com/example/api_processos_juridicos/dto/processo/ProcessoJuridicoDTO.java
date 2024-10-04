@@ -1,7 +1,7 @@
-package com.example.api_processos_juridicos.domain.processo;
+package com.example.api_processos_juridicos.dto.processo;
 
-import com.example.api_processos_juridicos.domain.pessoa.PessoaDTO;
-import com.example.api_processos_juridicos.domain.usuario.Usuario;
+import com.example.api_processos_juridicos.domain.processo.StatusProcesso;
+import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

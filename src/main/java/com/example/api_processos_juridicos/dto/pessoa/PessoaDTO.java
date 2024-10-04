@@ -1,5 +1,6 @@
-package com.example.api_processos_juridicos.domain.pessoa;
+package com.example.api_processos_juridicos.dto.pessoa;
 
+import com.example.api_processos_juridicos.domain.pessoa.TipoParte;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
