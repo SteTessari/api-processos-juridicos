@@ -1,58 +1,86 @@
 package com.example.api_processos_juridicos.domain.processo;
 
+import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
+import com.example.api_processos_juridicos.dto.processo.ProcessoJuridicoDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProcessoJuridicoService {
 
-    @Autowired
-    private ProcessoJuridicoRepository processoJuridicoRepository;
+    private final ProcessoJuridicoRepository processoJuridicoRepository;
     private final ProcessoJuridicoMapper processoJuridicoMapper = ProcessoJuridicoMapper.INSTANCE;
 
-    public ProcessoJuridicoDTO criarProcesso(ProcessoJuridicoDTO processo) {
-        buscarProcessoDTOPorNumero(processo.getNumeroProcesso());
+    private static final String ERRO_NUMERO_PROCESSO_EXISTENTE = "O número do processo informado já existe.";
+    private static final String ERRO_DATA_ABERTURA_INVALIDA = "A data de abertura não pode ser posterior à data atual.";
+    private static final String ERRO_NENHUM_PROCESSO_ENCONTRADO = "Nenhum processo encontrado.";
 
-        ProcessoJuridico processoJuridico = processoJuridicoMapper.toObject(processo);
+    public ProcessoJuridicoService(ProcessoJuridicoRepository processoJuridicoRepository) {
+        this.processoJuridicoRepository = processoJuridicoRepository;
+    }
+
+    public ProcessoJuridicoDTO criarProcesso(ProcessoJuridicoDTO processoDTO, List<Pessoa> partesEnvolvidas) {
+        verificarSeNumeroDoProcessoJaExiste(processoDTO.getNumeroProcesso());
+        validarDataAbertura(processoDTO.getDataAbertura());
+
+        ProcessoJuridico processoJuridico = processoJuridicoMapper.toObject(processoDTO);
+        processoJuridico.setPartesEnvolvidas(partesEnvolvidas);
+
         processoJuridico = processoJuridicoRepository.save(processoJuridico);
-
         return processoJuridicoMapper.toDTO(processoJuridico);
     }
 
     public ProcessoJuridicoDTO buscarProcessoDTOPorNumero(String numeroProcesso) {
-        Optional<ProcessoJuridico> processoJuridicoOptional = processoJuridicoRepository.findByNumeroProcesso(numeroProcesso);
-
-        if (processoJuridicoOptional.isEmpty())
-            throw new ApiException(HttpStatus.NO_CONTENT, "Nenhum processo encontrado.");
-
-        return processoJuridicoMapper.toDTO(processoJuridicoOptional.get());
+        return processoJuridicoRepository.findByNumeroProcesso(numeroProcesso)
+                .map(processoJuridicoMapper::toDTO)
+                .orElseThrow(() -> new ApiException(HttpStatus.NO_CONTENT, ERRO_NENHUM_PROCESSO_ENCONTRADO));
     }
+
     private ProcessoJuridico buscarProcessoPorNumero(String numeroProcesso) {
-        Optional<ProcessoJuridico> processoJuridicoOptional = processoJuridicoRepository.findByNumeroProcesso(numeroProcesso);
+        return processoJuridicoRepository.findByNumeroProcesso(numeroProcesso)
+                .orElseThrow(() -> new ApiException(HttpStatus.NO_CONTENT, ERRO_NENHUM_PROCESSO_ENCONTRADO));
+    }
 
-        if (processoJuridicoOptional.isEmpty())
-            throw new ApiException(HttpStatus.NO_CONTENT, "Nenhum processo encontrado.");
+    public ProcessoJuridicoDTO editarProcesso(String numeroProcesso, ProcessoJuridicoDTO processoAtualizadoDTO) {
+        ProcessoJuridico processoJuridico = buscarProcessoPorNumero(numeroProcesso);
+        ProcessoJuridico processoJuridicoAtualizado = processoJuridicoMapper.updateFromDTO(processoAtualizadoDTO, processoJuridico);
 
-        return processoJuridicoOptional.get();
+        processoJuridicoAtualizado = processoJuridicoRepository.save(processoJuridicoAtualizado);
+        return processoJuridicoMapper.toDTO(processoJuridicoAtualizado);
     }
 
     public List<ProcessoJuridicoDTO> listarProcessosPorStatus(StatusProcesso status) {
-        List<ProcessoJuridico> processoJuridicoList = processoJuridicoRepository.findByStatus(status);
-        return processoJuridicoList.stream().map(processoJuridicoMapper::toDTO).collect(Collectors.toList());
+        return converterParaDTO(processoJuridicoRepository.findByStatus(status));
     }
 
-    public ProcessoJuridicoDTO editarProcesso(String numeroProcesso, ProcessoJuridicoDTO processoJuridicoAtualizadoDTO) {
-        ProcessoJuridico processoJuridico = buscarProcessoPorNumero(numeroProcesso);
+    public List<ProcessoJuridicoDTO> listarProcessosPorDataAbertura(LocalDate dataAbertura) {
+        return converterParaDTO(processoJuridicoRepository.findByDataAberturaGreaterThanEqual(dataAbertura));
+    }
 
-        ProcessoJuridico processoJuridicoAtualizado = processoJuridicoMapper.updateFromDTO(processoJuridicoAtualizadoDTO, processoJuridico);
-        processoJuridicoAtualizado = processoJuridicoRepository.save(processoJuridicoAtualizado);
+    public List<ProcessoJuridicoDTO> listarProcessosPorInscricaoFederalDasPartes(List<String> inscricoesFederaisDasPartes) {
+        return converterParaDTO(processoJuridicoRepository.findByPartesEnvolvidas_InscricaoFederalIn(inscricoesFederaisDasPartes));
+    }
 
-        return processoJuridicoMapper.toDTO(processoJuridicoAtualizado);
+    private void verificarSeNumeroDoProcessoJaExiste(String numeroProcesso) {
+        if (processoJuridicoRepository.findByNumeroProcesso(numeroProcesso).isPresent()) {
+            throw new ApiException(HttpStatus.CONFLICT, ERRO_NUMERO_PROCESSO_EXISTENTE);
+        }
+    }
+
+    private void validarDataAbertura(LocalDate dataAbertura) {
+        if (dataAbertura.isAfter(LocalDate.now())) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, ERRO_DATA_ABERTURA_INVALIDA);
+        }
+    }
+
+    private List<ProcessoJuridicoDTO> converterParaDTO(List<ProcessoJuridico> processos) {
+        return processos.stream()
+                .map(processoJuridicoMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
