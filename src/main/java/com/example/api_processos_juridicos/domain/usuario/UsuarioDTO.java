@@ -1,5 +1,6 @@
 package com.example.api_processos_juridicos.domain.usuario;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,22 +16,23 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioDTO implements Serializable {
-    @NotBlank
+    @NotBlank(message = "Por favor informe o nome completo")
     private String nomeCompleto;
 
-    @NotBlank
+    @NotBlank(message = "Por favor informe o CPF/CNPJ")
     private String inscricaoFederal;
 
     @NotNull
     private TipoParte tipoParte;
 
-    @NotBlank
+    @NotBlank(message = "Por favor informe o telefone")
     private String telefone;
 
-    @NotBlank
+    @Email
+    @NotBlank(message = "Por favor informe o email")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Por favor informe a senha")
     @Size(min = 6, message = "A Senha deve conter pelo menos 6 dígitos.")
     private String senha;
 
