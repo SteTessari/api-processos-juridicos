@@ -41,7 +41,7 @@ public class ProcessoJuridicoService {
                 .orElseThrow(() -> new ApiException(HttpStatus.NO_CONTENT, ERRO_NENHUM_PROCESSO_ENCONTRADO));
     }
 
-    private ProcessoJuridico buscarProcessoPorNumero(String numeroProcesso) {
+    public ProcessoJuridico buscarProcessoPorNumero(String numeroProcesso) {
         return processoJuridicoRepository.findByNumeroProcesso(numeroProcesso)
                 .orElseThrow(() -> new ApiException(HttpStatus.NO_CONTENT, ERRO_NENHUM_PROCESSO_ENCONTRADO));
     }

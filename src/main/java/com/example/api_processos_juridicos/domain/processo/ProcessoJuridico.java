@@ -1,5 +1,6 @@
 package com.example.api_processos_juridicos.domain.processo;
 
+import com.example.api_processos_juridicos.domain.acao.Acao;
 import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,5 +40,8 @@ public class ProcessoJuridico {
             joinColumns = @JoinColumn(name = "processo_id"),
             inverseJoinColumns = @JoinColumn(name = "pessoa_id"))
     private List<Pessoa> partesEnvolvidas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "processo", cascade = CascadeType.ALL)
+    private List<Acao> acoes = new ArrayList<>();
 
 }
