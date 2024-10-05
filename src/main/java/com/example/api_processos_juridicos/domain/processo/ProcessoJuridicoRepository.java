@@ -1,6 +1,8 @@
 package com.example.api_processos_juridicos.domain.processo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -15,5 +17,5 @@ public interface ProcessoJuridicoRepository extends JpaRepository<ProcessoJuridi
     Optional<ProcessoJuridico> findByNumeroProcesso(String numeroProcesso);
 
     List<ProcessoJuridico> findByStatus(StatusProcesso status);
-
+    
 }

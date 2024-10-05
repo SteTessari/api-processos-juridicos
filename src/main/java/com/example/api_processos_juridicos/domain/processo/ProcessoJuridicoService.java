@@ -1,13 +1,18 @@
 package com.example.api_processos_juridicos.domain.processo;
 
 import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
+import com.example.api_processos_juridicos.dto.processo.ProcessoFiltroDTO;
 import com.example.api_processos_juridicos.dto.processo.ProcessoJuridicoDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,5 +95,20 @@ public class ProcessoJuridicoService {
         processoJuridico.setStatus(StatusProcesso.ARQUIVADO);
 
         processoJuridicoRepository.save(processoJuridico);
+    }
+
+    public List<ProcessoJuridico> filtrar(ProcessoFiltroDTO filtroDTO) {
+        ProcessoJuridico processoJuridico = processoJuridicoMapper.toObject(filtroDTO);
+        List<ProcessoJuridico> processos = processoJuridicoRepository.findAll(Example.of(processoJuridico));
+
+        if (Objects.nonNull(filtroDTO.getInscricoesFederaisDasPartes())) {
+            processos = processos.stream()
+                    .filter(processo -> processo.getPartesEnvolvidas().stream()
+                            .anyMatch(pessoa -> filtroDTO.getInscricoesFederaisDasPartes().contains(pessoa.getInscricaoFederal()))
+                    )
+                    .collect(Collectors.toList());
+        }
+
+        return processos;
     }
 }

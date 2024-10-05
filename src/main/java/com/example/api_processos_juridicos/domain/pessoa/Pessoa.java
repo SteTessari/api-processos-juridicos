@@ -1,6 +1,8 @@
 package com.example.api_processos_juridicos.domain.pessoa;
 
 import com.example.api_processos_juridicos.domain.processo.ProcessoJuridico;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,5 +41,6 @@ public class Pessoa {
     private String email;
 
     @ManyToMany(mappedBy = "partesEnvolvidas")
+    @JsonIgnore
     private List<ProcessoJuridico> processos = new ArrayList<>();
 }

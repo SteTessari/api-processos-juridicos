@@ -2,9 +2,11 @@ package com.example.api_processos_juridicos.controllers.usuario;
 
 import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
 import com.example.api_processos_juridicos.domain.pessoa.PessoaService;
+import com.example.api_processos_juridicos.domain.processo.ProcessoJuridico;
 import com.example.api_processos_juridicos.domain.processo.ProcessoJuridicoService;
 import com.example.api_processos_juridicos.domain.processo.StatusProcesso;
 import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
+import com.example.api_processos_juridicos.dto.processo.ProcessoFiltroDTO;
 import com.example.api_processos_juridicos.dto.processo.ProcessoJuridicoDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +63,13 @@ public class ProcessoJuridicoController {
     }
 
     @PutMapping("/arquivar/{numeroProcesso}")
-    public String arquivar(@PathVariable String numeroProcesso){
+    public String arquivar(@PathVariable String numeroProcesso) {
         processoJuridicoService.arquivar(numeroProcesso);
         return "Processo arquivado com sucesso!";
+    }
+
+    @PostMapping("/filtrar")
+    public List<ProcessoJuridico> filtrar(@RequestBody ProcessoFiltroDTO filtroDTO) {
+        return processoJuridicoService.filtrar(filtroDTO);
     }
 }
