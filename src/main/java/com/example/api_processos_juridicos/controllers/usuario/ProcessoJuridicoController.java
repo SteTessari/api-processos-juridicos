@@ -60,4 +60,9 @@ public class ProcessoJuridicoController {
         return processoJuridicoService.listarProcessosPorInscricaoFederalDasPartes(inscricoesFederais);
     }
 
+    @PutMapping("/arquivar/{numeroProcesso}")
+    public String arquivar(@PathVariable String numeroProcesso){
+        processoJuridicoService.arquivar(numeroProcesso);
+        return "Processo arquivado com sucesso!";
+    }
 }

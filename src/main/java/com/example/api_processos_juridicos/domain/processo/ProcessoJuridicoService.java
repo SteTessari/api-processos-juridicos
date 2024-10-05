@@ -83,4 +83,12 @@ public class ProcessoJuridicoService {
                 .map(processoJuridicoMapper::toDTO)
                 .collect(Collectors.toList());
     }
+
+    public void arquivar(String numeroProcesso) {
+        ProcessoJuridico processoJuridico = buscarProcessoPorNumero(numeroProcesso);
+
+        processoJuridico.setStatus(StatusProcesso.ARQUIVADO);
+
+        processoJuridicoRepository.save(processoJuridico);
+    }
 }
