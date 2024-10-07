@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface AcaoRepository extends JpaRepository<Acao, Long> {
     List<Acao> findByProcesso_NumeroProcesso(String numeroProcesso);
+
+    List<Acao> findByProcesso_NumeroProcessoAndTipoAcao(String numeroProcesso, TipoAcao tipoAcao);
 }
