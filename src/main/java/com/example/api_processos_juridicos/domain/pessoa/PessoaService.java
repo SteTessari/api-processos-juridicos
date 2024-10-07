@@ -2,6 +2,7 @@ package com.example.api_processos_juridicos.domain.pessoa;
 
 import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
+import com.example.api_processos_juridicos.utils.DocumentoUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,21 @@ public class PessoaService {
     public Pessoa criar(PessoaDTO pessoaDTO) {
         String inscricaoFederal = normalizarInscricaoFederal(pessoaDTO.getInscricaoFederal());
 
+        if (!validarInscricaoFederal(inscricaoFederal)) {
+            throw new ApiException(HttpStatus.BAD_REQUEST, "O CPF/CNPJ de "+ pessoaDTO.getNomeCompleto() + " é inválido.");
+        }
+
         return pessoaRepository.findByInscricaoFederal(inscricaoFederal)
                 .orElseGet(() -> gravarPessoa(pessoaDTO, inscricaoFederal));
+    }
+
+    private boolean validarInscricaoFederal(String inscricaoFederal) {
+        if (DocumentoUtils.isCpf(inscricaoFederal)) {
+            return DocumentoUtils.isCpf(inscricaoFederal);
+        } else if (DocumentoUtils.isCnpj(inscricaoFederal)) {
+            return DocumentoUtils.isCnpj(inscricaoFederal);
+        }
+        return false;
     }
 
     private String normalizarInscricaoFederal(String inscricaoFederal) {
