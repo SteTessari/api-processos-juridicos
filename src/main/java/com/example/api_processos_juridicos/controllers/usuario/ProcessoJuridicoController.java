@@ -42,7 +42,7 @@ public class ProcessoJuridicoController {
         return processoJuridicoService.buscarProcessoDTOPorNumero(numero);
     }
 
-    @PostMapping("/{numeroProcesso}")
+    @PutMapping("/{numeroProcesso}")
     public ProcessoJuridicoDTO editarProcesso(@PathVariable String numeroProcesso, @RequestBody ProcessoJuridicoDTO processo) {
         return processoJuridicoService.editarProcesso(numeroProcesso, processo);
     }
