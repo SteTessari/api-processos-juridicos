@@ -21,7 +21,7 @@ public class Acao {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private TipoAcao tipoAcao;  // Petição, Audiência, Sentença
+    private TipoAcao tipoAcao;
 
     private LocalDate dataRegistro;
     private String descricao;
