@@ -1,7 +1,6 @@
 package com.example.api_processos_juridicos.domain.pessoa;
 
 import com.example.api_processos_juridicos.domain.processo.ProcessoJuridico;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,7 +26,7 @@ public class Pessoa {
     @Column(nullable = false)
     private String nomeCompleto;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String inscricaoFederal;
 
     @Column(nullable = false)
