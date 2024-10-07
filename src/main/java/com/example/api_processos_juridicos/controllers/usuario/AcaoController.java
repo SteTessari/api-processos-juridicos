@@ -3,6 +3,7 @@ package com.example.api_processos_juridicos.controllers.usuario;
 import com.example.api_processos_juridicos.domain.acao.Acao;
 import com.example.api_processos_juridicos.domain.acao.AcaoMapper;
 import com.example.api_processos_juridicos.domain.acao.AcaoService;
+import com.example.api_processos_juridicos.domain.acao.TipoAcao;
 import com.example.api_processos_juridicos.domain.processo.ProcessoJuridico;
 import com.example.api_processos_juridicos.domain.processo.ProcessoJuridicoService;
 import com.example.api_processos_juridicos.dto.acao.AcaoDTO;
@@ -24,13 +25,13 @@ public class AcaoController {
 
 
     @PostMapping
-    public Acao registrar(@Valid @RequestBody AcaoDTO acaoDTO){
+    public AcaoDTO registrar(@Valid @RequestBody AcaoDTO acaoDTO){
         Acao acao = acaoMapper.toObject(acaoDTO);
 
         ProcessoJuridico processoJuridico = processoJuridicoService.buscarProcessoPorNumero(acaoDTO.getNumeroProcesso());
         acao.setProcesso(processoJuridico);
 
-        return acaoService.registrarAcao(acao);
+        return acaoMapper.toDTO(acaoService.registrarAcao(acao));
     }
 
     @GetMapping("/{numeroProcesso}")
