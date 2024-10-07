@@ -37,4 +37,8 @@ public class AcaoController {
     public List<Acao> buscarAcoesDoProcesso(@PathVariable String numeroProcesso){
         return acaoService.buscarAcoesDoProcesso(numeroProcesso);
     }
+    @GetMapping("/{numeroProcesso}")
+    public List<Acao> buscarAcoesDoProcessoPorTipo(@PathVariable String numeroProcesso, @RequestParam("tipo")TipoAcao tipoAcao){
+        return acaoService.buscarAcoesDoProcessoPorTipo(numeroProcesso, tipoAcao);
+    }
 }
