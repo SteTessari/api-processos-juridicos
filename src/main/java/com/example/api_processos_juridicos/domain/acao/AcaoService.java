@@ -13,6 +13,7 @@ public class AcaoService {
     @Autowired
     private AcaoRepository acaoRepository;
 
+    private static final String ERRO_ACAO_DO_PROCESSO_NAO_ENCONTRADA = "Nenhuma ação encontrada para o processo informado.";
 
     public Acao registrarAcao(Acao acao) {
         return acaoRepository.save(acao);
@@ -24,6 +25,14 @@ public class AcaoService {
         if (!acoes.isEmpty())
             return acoes;
         else
-            throw new ApiException(HttpStatus.NO_CONTENT, "Nenhum processo encontrado.");
+            throw new ApiException(HttpStatus.NO_CONTENT, ERRO_ACAO_DO_PROCESSO_NAO_ENCONTRADA);
     }
+
+    public List<Acao> buscarAcoesDoProcessoPorTipo(String numeroProcesso, TipoAcao tipoAcao) {
+        List<Acao> acoes = acaoRepository.findByProcesso_NumeroProcessoAndTipoAcao(numeroProcesso, tipoAcao);
+
+        if (!acoes.isEmpty())
+            return acoes;
+        else
+            throw new ApiException(HttpStatus.NO_CONTENT, ERRO_ACAO_DO_PROCESSO_NAO_ENCONTRADA);    }
 }
