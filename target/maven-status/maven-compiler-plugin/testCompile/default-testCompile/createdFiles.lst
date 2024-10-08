@@ -1,0 +1,9 @@
+com\example\api_processos_juridicos\testeAutomatizado\processo\ProcessoJuridicoControllerTest.class
+com\example\api_processos_juridicos\testeAutomatizado\acao\AcaoControllerTest.class
+com\example\api_processos_juridicos\testeAutomatizado\pessoa\PessoaServiceTest.class
+com\example\api_processos_juridicos\testeAutomatizado\processo\ProcessoJuridicoServiceTest.class
+com\example\api_processos_juridicos\testeAutomatizado\usuario\UsuarioControllerTest.class
+com\example\api_processos_juridicos\testeAutomatizado\pessoa\PessoaControllerTest.class
+com\example\api_processos_juridicos\testeAutomatizado\acao\AcaoServiceTest.class
+com\example\api_processos_juridicos\ApiProcessosJuridicosApplicationTests.class
+com\example\api_processos_juridicos\testeAutomatizado\usuario\UsuarioServiceTest.class
