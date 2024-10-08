@@ -24,6 +24,8 @@ Esta é uma API desenvolvida para gerenciar processos jurídicos, incluindo o ca
 - PostgreSQL
 - Sonarqube
 - Jacoco
+- Junit
+- Mockito
 
 
 ## Instalação
