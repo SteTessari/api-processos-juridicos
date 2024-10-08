@@ -10,7 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-08T10:37:59-0300",
+    date = "2024-10-08T11:24:13-0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 public class ProcessoJuridicoMapperImpl implements ProcessoJuridicoMapper {
