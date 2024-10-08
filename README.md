@@ -7,10 +7,6 @@ Esta é uma API desenvolvida para gerenciar processos jurídicos, incluindo o ca
 - [Tecnologias](#tecnologias)
 - [Instalação](#instalação)
 - [Endpoints](#endpoints)
-  - [Usuário](#usuário)
-  - [Pessoa](#pessoa)
-  - [Processo Jurídico](#processo-jurídico)
-  - [Ação](#ação)
 - [Exemplo de Requisições](#exemplo-de-requisições)
 
 ## Tecnologias
