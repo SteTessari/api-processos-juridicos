@@ -2,6 +2,7 @@ package com.example.api_processos_juridicos.domain.processo;
 
 import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
 import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
+import com.example.api_processos_juridicos.dto.processo.ProcessoFiltroDTO;
 import com.example.api_processos_juridicos.dto.processo.ProcessoJuridicoDTO;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-05T13:44:10-0300",
+    date = "2024-10-08T10:37:59-0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 public class ProcessoJuridicoMapperImpl implements ProcessoJuridicoMapper {
@@ -27,6 +28,19 @@ public class ProcessoJuridicoMapperImpl implements ProcessoJuridicoMapper {
         processoJuridico.setDescricaoCaso( processoJuridicoDTO.getDescricaoCaso() );
         processoJuridico.setStatus( processoJuridicoDTO.getStatus() );
         processoJuridico.setPartesEnvolvidas( pessoaDTOListToPessoaList( processoJuridicoDTO.getPartesEnvolvidas() ) );
+
+        return processoJuridico;
+    }
+
+    @Override
+    public ProcessoJuridico toObject(ProcessoFiltroDTO filtroDTO) {
+        if ( filtroDTO == null ) {
+            return null;
+        }
+
+        ProcessoJuridico processoJuridico = new ProcessoJuridico();
+
+        processoJuridico.setDataAbertura( filtroDTO.getDataAbertura() );
 
         return processoJuridico;
     }

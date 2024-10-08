@@ -5,7 +5,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-05T13:44:11-0300",
+    date = "2024-10-08T10:38:00-0300",
     comments = "version: 1.6.2, compiler: javac, environment: Java 17.0.12 (Amazon.com Inc.)"
 )
 public class UsuarioMapperImpl implements UsuarioMapper {
