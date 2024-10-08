@@ -40,16 +40,25 @@
 		<sonar.coverage.exclusions>**/*Test*.java</sonar.coverage.exclusions>
 		<sonar.coverage.minimum>80</sonar.coverage.minimum>
 		<sonar.coverage.exclusions>
-			**/com/example/api_processos_juridicos/exceptions/** ,
-			**/com/example/api_processos_juridicos/security/** ,
+			**/com/example/api_processos_juridicos/exceptions/ApiException.java,
+			**/com/example/api_processos_juridicos/security/CustomUserDetailsService.java,
+			**/com/example/api_processos_juridicos/security/RestExceptionHandler.java,
+			**/com/example/api_processos_juridicos/security/SecurityConfig.java,
+			**/com/example/api_processos_juridicos/security/SecurityFilter.java,
+			**/com/example/api_processos_juridicos/security/TokenService.java,
 			**/com/example/api_processos_juridicos/domain/acao/TipoAcao.java
 		</sonar.coverage.exclusions>
 
 		<sonar.exclusions>
-			**/com/example/api_processos_juridicos/exceptions ,
-			**/com/example/api_processos_juridicos/security ,
-			**src/main/java/com/example/api_processos_juridicos/domain/acao/TipoAcao.java
+			**/com/example/api_processos_juridicos/exceptions/ApiException.java,
+			**/com/example/api_processos_juridicos/security/CustomUserDetailsService.java,
+			**/com/example/api_processos_juridicos/security/RestExceptionHandler.java,
+			**/com/example/api_processos_juridicos/security/SecurityConfig.java,
+			**/com/example/api_processos_juridicos/security/SecurityFilter.java,
+			**/com/example/api_processos_juridicos/security/TokenService.java,
+			**/com/example/api_processos_juridicos/domain/acao/TipoAcao.java
 		</sonar.exclusions>
+
 
 		<junit.version>4.13.2</junit.version>
 	</properties>
