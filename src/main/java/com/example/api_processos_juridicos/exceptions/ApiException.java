@@ -8,23 +8,14 @@ import org.springframework.http.HttpStatusCode;
 @EqualsAndHashCode(callSuper = true)
 public class ApiException extends RuntimeException{
 
-    private HttpStatusCode code;
-    private String message;
-    private String description;
+    private final HttpStatusCode code;
+    private final String message;
 
     public ApiException(HttpStatusCode code, String message) {
         super(message);
         this.code = code;
         this.message = message;
     }
-
-    public ApiException(HttpStatusCode code, String message, String description) {
-        super(description);
-        this.code = code;
-        this.message = message;
-        this.description = description;
-    }
-
     @Override
     public String toString() {
         return "ApiException{" +

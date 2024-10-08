@@ -7,7 +7,9 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.api_processos_juridicos.domain.usuario.Usuario;
 import com.example.api_processos_juridicos.dto.token.JwtTokenDTO;
+import com.example.api_processos_juridicos.exceptions.ApiException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -38,7 +40,7 @@ public class TokenService {
                     .sign(algorithm);
 
         } catch (JWTCreationException e) {
-            throw new RuntimeException("Erro ao gerar o token.", e);
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar o token.");
         }
     }
 

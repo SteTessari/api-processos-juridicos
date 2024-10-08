@@ -3,29 +3,26 @@ package com.example.api_processos_juridicos.domain.pessoa;
 import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
 import com.example.api_processos_juridicos.utils.DocumentoUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class PessoaService {
 
     private final PessoaRepository pessoaRepository;
-    private final PessoaMapper pessoaMapper = PessoaMapper.INSTANCE;
-
+    private static final PessoaMapper pessoaMapper = PessoaMapper.INSTANCE;
     private static final String ERRO_PESSOA_NAO_ENCONTRADA = "Pessoa não encontrada.";
 
-
-    public PessoaService(PessoaRepository pessoaRepository) {
-        this.pessoaRepository = pessoaRepository;
-    }
 
     public Pessoa criar(PessoaDTO pessoaDTO) {
         String inscricaoFederal = normalizarInscricaoFederal(pessoaDTO.getInscricaoFederal());
 
         if (!validarInscricaoFederal(inscricaoFederal)) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "O CPF/CNPJ de "+ pessoaDTO.getNomeCompleto() + " é inválido.");
+            throw new ApiException(HttpStatus.BAD_REQUEST, "O CPF/CNPJ de " + pessoaDTO.getNomeCompleto() + " é inválido.");
         }
 
         return pessoaRepository.findByInscricaoFederal(inscricaoFederal)
@@ -42,7 +39,7 @@ public class PessoaService {
     }
 
     private String normalizarInscricaoFederal(String inscricaoFederal) {
-        return inscricaoFederal.replaceAll("[^0-9]", "");
+        return inscricaoFederal.replaceAll("\\D", "");
     }
 
     private Pessoa gravarPessoa(PessoaDTO pessoaDTO, String inscricaoFederal) {

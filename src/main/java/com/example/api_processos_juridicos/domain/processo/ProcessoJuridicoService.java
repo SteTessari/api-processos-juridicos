@@ -4,30 +4,26 @@ import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
 import com.example.api_processos_juridicos.dto.processo.ProcessoFiltroDTO;
 import com.example.api_processos_juridicos.dto.processo.ProcessoJuridicoDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ProcessoJuridicoService {
 
     private final ProcessoJuridicoRepository processoJuridicoRepository;
-    private final ProcessoJuridicoMapper processoJuridicoMapper = ProcessoJuridicoMapper.INSTANCE;
+    private static final ProcessoJuridicoMapper processoJuridicoMapper = ProcessoJuridicoMapper.INSTANCE;
 
     private static final String ERRO_NUMERO_PROCESSO_EXISTENTE = "O número do processo informado já existe.";
     private static final String ERRO_DATA_ABERTURA_INVALIDA = "A data de abertura não pode ser posterior à data atual.";
     private static final String ERRO_NENHUM_PROCESSO_ENCONTRADO = "Nenhum processo encontrado.";
 
-    public ProcessoJuridicoService(ProcessoJuridicoRepository processoJuridicoRepository) {
-        this.processoJuridicoRepository = processoJuridicoRepository;
-    }
 
     public ProcessoJuridicoDTO criarProcesso(ProcessoJuridicoDTO processoDTO, List<Pessoa> partesEnvolvidas) {
         verificarSeNumeroDoProcessoJaExiste(processoDTO.getNumeroProcesso());
@@ -86,7 +82,7 @@ public class ProcessoJuridicoService {
     private List<ProcessoJuridicoDTO> converterParaDTO(List<ProcessoJuridico> processos) {
         return processos.stream()
                 .map(processoJuridicoMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public void arquivar(String numeroProcesso) {
@@ -106,7 +102,7 @@ public class ProcessoJuridicoService {
                     .filter(processo -> processo.getPartesEnvolvidas().stream()
                             .anyMatch(pessoa -> filtroDTO.getInscricoesFederaisDasPartes().contains(pessoa.getInscricaoFederal()))
                     )
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         return processos;

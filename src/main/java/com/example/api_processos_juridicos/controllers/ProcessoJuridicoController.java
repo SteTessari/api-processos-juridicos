@@ -1,4 +1,4 @@
-package com.example.api_processos_juridicos.controllers.usuario;
+package com.example.api_processos_juridicos.controllers;
 
 import com.example.api_processos_juridicos.domain.pessoa.Pessoa;
 import com.example.api_processos_juridicos.domain.pessoa.PessoaService;
@@ -9,7 +9,7 @@ import com.example.api_processos_juridicos.dto.pessoa.PessoaDTO;
 import com.example.api_processos_juridicos.dto.processo.ProcessoFiltroDTO;
 import com.example.api_processos_juridicos.dto.processo.ProcessoJuridicoDTO;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -18,12 +18,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/processos-juridicos")
+@RequiredArgsConstructor
 public class ProcessoJuridicoController {
 
-    @Autowired
-    private ProcessoJuridicoService processoJuridicoService;
-    @Autowired
-    private PessoaService pessoaService;
+    private final ProcessoJuridicoService processoJuridicoService;
+    private final PessoaService pessoaService;
 
 
     @PostMapping

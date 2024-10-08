@@ -1,6 +1,9 @@
 package com.example.api_processos_juridicos.utils;
 
 public class DocumentoUtils {
+    private DocumentoUtils() {
+    }
+
     public static boolean isCpf(String documento) {
         return documento.length() == 11 && validarCpf(documento);
     }

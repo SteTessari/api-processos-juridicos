@@ -23,7 +23,7 @@ public class RestExceptionHandler {
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
 
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
@@ -33,19 +33,19 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<?> handleResourceAccessDeniedException(AccessDeniedException e) {
+    public ResponseEntity<Map<String, Object>> handleResourceAccessDeniedException(AccessDeniedException e) {
         log.error(e.getMessage());
         return createErrorResponse(HttpStatus.FORBIDDEN, e.getMessage());
     }
 
     @ExceptionHandler(ApiException.class)
-    public ResponseEntity<?> handleResourceApiException(ApiException e) {
+    public ResponseEntity<Map<String, Object>> handleResourceApiException(ApiException e) {
         log.error(e.getMessage());
         return createErrorResponse(HttpStatus.valueOf(e.getCode().value()), e.getMessage());
     }
 
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<?> handleResourceThrowableException(Throwable e) {
+    public ResponseEntity<Map<String, Object>> handleResourceThrowableException(Throwable e) {
         log.error(e.getMessage());
         return createErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }

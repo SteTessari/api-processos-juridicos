@@ -4,6 +4,7 @@ import com.example.api_processos_juridicos.dto.usuario.LoginDTO;
 import com.example.api_processos_juridicos.dto.usuario.UsuarioDTO;
 import com.example.api_processos_juridicos.exceptions.ApiException;
 import com.example.api_processos_juridicos.security.TokenService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,14 +14,13 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService extends TokenService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    private final UsuarioMapper usuarioMapper = UsuarioMapper.INSTANCE;
+    private static final UsuarioMapper usuarioMapper = UsuarioMapper.INSTANCE;
 
     public void criar(UsuarioDTO usuarioDTO) {
         Optional<Usuario> usuarioEncontrado = usuarioRepository.findByEmail(usuarioDTO.getEmail());
@@ -50,7 +50,7 @@ public class UsuarioService extends TokenService {
         }
     }
     private boolean isSenhaValida(UsuarioDTO usuarioDTO) {
-        String regexSenhaValida = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
+        String regexSenhaValida = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
         return Pattern.matches(regexSenhaValida, usuarioDTO.getSenha());
     }
 

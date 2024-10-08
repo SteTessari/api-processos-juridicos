@@ -1,17 +1,17 @@
 package com.example.api_processos_juridicos.domain.acao;
 
 import com.example.api_processos_juridicos.exceptions.ApiException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AcaoService {
 
-    @Autowired
-    private AcaoRepository acaoRepository;
+    private final AcaoRepository acaoRepository;
 
     private static final String ERRO_ACAO_DO_PROCESSO_NAO_ENCONTRADA = "Nenhuma ação encontrada para o processo informado.";
 
@@ -34,5 +34,6 @@ public class AcaoService {
         if (!acoes.isEmpty())
             return acoes;
         else
-            throw new ApiException(HttpStatus.NO_CONTENT, ERRO_ACAO_DO_PROCESSO_NAO_ENCONTRADA);    }
+            throw new ApiException(HttpStatus.NO_CONTENT, ERRO_ACAO_DO_PROCESSO_NAO_ENCONTRADA);
+    }
 }

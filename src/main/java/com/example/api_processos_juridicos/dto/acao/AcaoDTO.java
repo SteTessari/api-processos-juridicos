@@ -1,7 +1,7 @@
 package com.example.api_processos_juridicos.dto.acao;
 
 import com.example.api_processos_juridicos.domain.acao.TipoAcao;
-import com.example.api_processos_juridicos.domain.processo.ProcessoJuridico;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,7 @@ public class AcaoDTO implements Serializable {
     @NotNull(message = "Por favor informe o tipo da ação")
     private TipoAcao tipoAcao;
     @NotNull(message = "Por favor informe a data de registro")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataRegistro;
     @NotBlank(message = "Por favor informe a descrição")
     private String descricao;
