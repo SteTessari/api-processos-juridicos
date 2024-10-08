@@ -21,7 +21,10 @@ Esta é uma API desenvolvida para gerenciar processos jurídicos, incluindo o ca
 - JPA
 - Maven
 - Lombok
-- H2 Database (para testes e desenvolvimento)
+- PostgreSQL
+- Sonarqube
+- Jacoco
+
 
 ## Instalação
 
