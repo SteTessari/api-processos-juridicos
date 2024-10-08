@@ -1,6 +1,6 @@
-package com.example.api_processos_juridicos.usuario.controller;
+package com.example.api_processos_juridicos.testeAutomatizado.usuario;
 
-import com.example.api_processos_juridicos.controllers.usuario.UsuarioController;
+import com.example.api_processos_juridicos.controllers.UsuarioController;
 import com.example.api_processos_juridicos.domain.usuario.UsuarioService;
 import com.example.api_processos_juridicos.dto.usuario.LoginDTO;
 import com.example.api_processos_juridicos.dto.usuario.UsuarioDTO;
@@ -10,9 +10,11 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Set;
 
@@ -21,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 class UsuarioControllerTest {
 
     @InjectMocks
